@@ -46,7 +46,7 @@ class Event {
   @HiveField(17)
   bool verified;
   @HiveField(18)
-   DateTime dateTime;
+  DateTime dateTime;
   @HiveField(19)
   bool isEvent;
 
@@ -68,7 +68,7 @@ class Event {
       this.faq,
       this.description,
       this.imageURL,
-      this.verified){this.isEvent = true;}
+      this.verified,/*this.dateTime*/){this.isEvent = true;}
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -88,7 +88,8 @@ class Event {
         'faq': faq,
         'description': description,
         'imageURL': imageURL,
-        'verified': verified
+        'verified': verified,
+        'dateTime': dateTime
       };
 
 
@@ -112,7 +113,7 @@ Event fromJson(Map<String, dynamic> json) {
       json['faq'],
       json['description'],
       json['imageURL'],
-      json['verified']);
+      json['verified'],/*json['dateTime']*/);
 
   return e;
 }

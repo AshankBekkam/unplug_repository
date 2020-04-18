@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:story_view/story_view.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:learning/provider/from_snapshot.dart';

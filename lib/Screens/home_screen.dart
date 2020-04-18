@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Position _currentPosition;
   String currentAddress;
+  String selectedAddress = '';
   @override
   void initState() {
     super.initState();
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: UnplugAppBar('Find Parties', currentAddress),
+            child: UnplugAppBar('Find Parties', selectedAddress==''?currentAddress:selectedAddress),
             preferredSize:
                 Size.fromHeight(MediaQuery.of(context).size.height * 0.1)),
         body: Column(
@@ -43,7 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(width:MediaQuery.of(context).size.width * 0.5 ,
                   child: FlatButton(
                       onPressed: (){
-                        currentAddress = navigateAndGetLocation(context);
+                        selectedAddress = navigateAndGetLocation(context);
+
+
 
                       },
                       child: Row(
@@ -88,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           .orderBy('isStarred', descending: true)
                           .snapshots():Firestore.instance
                           .collection('events')
+                          .where('city',isEqualTo: selectedAddress == ''?currentAddress:selectedAddress)
                           .where('genre',isEqualTo: selectedType )
                           .orderBy('isStarred', descending: true)
                           .snapshots(),
@@ -134,7 +138,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   navigateAndGetLocation(BuildContext context) async
   {
-    currentAddress = await Navigator.push(context,MaterialPageRoute(builder: (context)=>ChooseLocation()));
+
+    selectedAddress = await Navigator.push(context,MaterialPageRoute(builder: (context)=>ChooseLocation()));
 
 
   }

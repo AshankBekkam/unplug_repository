@@ -26,7 +26,7 @@ Event fromSnapshot(
       snapshot['faq'],
       snapshot['description'],
       snapshot['imageURL'],
-      snapshot['verified']);
+      snapshot['verified'],/*DateTime.fromMillisecondsSinceEpoch(snapshot['dateTime']*1000)*/);
 
   return e;
 }
